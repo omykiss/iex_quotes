@@ -114,6 +114,10 @@ class TestIex(unittest.TestCase):
         # Envrionment selection not a number >= 0
         mocked_input.side_effect = ['a', 'y']        
         self.assertRaises(TypeError, set_env, in_hash_map)
+
+    def test_create_symbols(self):
+        symbols = create_symbols('tickerListSmall.csv')
+        self.assertEqual(symbols, ['avdv','bbd.b-ct','vgro-ct','vig','REI.UN-CT'])
     
 if __name__ == '__main__':
     unittest.main()
