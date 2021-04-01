@@ -159,13 +159,22 @@ def create_symbols(input_csv):
         Ticker symbols to process downstream
     """
     symbols = []
-    with open(input_csv,'rt') as csv_file: 
-        reader = csv.reader(csv_file, delimiter=',', quotechar='|')    
-        for row in reader:
-            stock_count = len(row) + 1
-            print('There are ' + str(stock_count) + ' stocks to process in the input file') 
-            for column in row:
-                symbols.append(column)                       
+    try:
+        with open(input_csv,'rt') as csv_file: 
+            reader = csv.reader(csv_file, delimiter=',', quotechar='|')    
+            for row in reader:
+                stock_count = len(row) + 1
+                print('There are ' + str(stock_count) + ' stocks to process in the input file') 
+                for column in row:
+                    symbols.append(column)
+    except FileNotFoundError as e:
+        print(type(e))
+        exception_exit('Error: Could not open the ticker symbol input file, ' + input_csv 
+            + '. Make sure the file is located in the root directory (where this program is '
+            'running from)')
+    except:        
+        exception_exit('Error: Someting went wrong reading the ticker symbol input file')
+                
     return symbols
 
 def get_hist_prices_payload(range, ticker_symbol, token, base_url):
