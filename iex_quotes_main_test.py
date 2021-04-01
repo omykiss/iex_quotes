@@ -115,9 +115,23 @@ class TestIex(unittest.TestCase):
         mocked_input.side_effect = ['a', 'y']        
         self.assertRaises(TypeError, set_env, in_hash_map)
 
-    def test_create_symbols(self):
+    def test_create_symbols_01(self):
         symbols = create_symbols('tickerListSmall.csv')
         self.assertEqual(symbols, ['avdv','bbd.b-ct','vgro-ct','vig','REI.UN-CT'])
+    
+    def test_create_symbols_02(self):
+        symbols = create_symbols('tickerListSingle.csv')
+        self.assertEqual(symbols, ['cvs'])        
+
+    def test_create_symbols_03(self):
+        symbols = create_symbols('tickerListEmpty.csv')
+        self.assertEqual(symbols, [])  
+
+    def test_create_symbols_04(self):
+        with self.assertRaises(SystemExit) as cm:
+            symbols = create_symbols('tickerListDoesNotExist.csv')
+
+        self.assertEqual(cm.exception.code, 1)                
     
 if __name__ == '__main__':
     unittest.main()
