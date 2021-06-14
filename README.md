@@ -12,5 +12,5 @@ name, IEX API token and IEX API URL. For example, one possible environment
 configuration csv record would be:
     prod,123token,www.apiurl.com
 The environment configuration CSV file included in the repo has a dev envrionment
-configured and ready to do
+configured and ready to run.
 
